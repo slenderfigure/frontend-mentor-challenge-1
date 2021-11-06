@@ -1,0 +1,59 @@
+<div #shoppingCart *ngIf="cartVisible" 
+  role="menu"
+  class="shopping-cart">
+  <header class="shopping-cart__header">
+    <span class="label">Cart</span>
+  </header>
+
+  <main class="shopping-cart__body">
+    <div *ngIf="loading; else content"
+      role="progressbar" 
+      class="spinner">
+      <span class="inner-ring"></span>
+    </div>
+
+    <ng-template #content>
+      <h4 *ngIf="!cart.length; else itemList"
+        class="shopping-cart__no-items-message">
+        Your cart is empty.
+      </h4>
+
+      <ng-template #itemList>
+        <ul role="menu" class="shopping-cart__item-list">
+          <li *ngFor="let item of cart" 
+            role="menuitem" 
+            class="shopping-cart__item">
+            <figure class="item-thumbnail">
+              <img [src]="item.thumbnail" 
+                [alt]="item.name" 
+                class="thumbnail"
+                draggable="false">
+            </figure>
+            
+            <div class="item-details">
+              <p class="item-name">{{ item.name }}</p>
+              <span class="item-unit-price">{{ item.unitPrice | currency }}</span>
+              <span class="item-quantity">x{{ item.quantity }}</span>
+              <span class="item-total-price">{{ item.totalPrice | currency }}</span>
+            </div>
+      
+            <button (click)="onRemoveItem($event, item.id)"
+              aria-label="Remove item from cart"
+              type="button" 
+              class="remove-item-btn">
+              <img src="assets/images/icon-delete.svg" 
+                alt="Delete Icon" 
+                class="icon"
+                draggable="false">
+            </button>
+          </li>
+        </ul>
+
+        <form class="shopping-cart__checkout-form">
+          <button type="submit" 
+            class="checkout-btn btn btn-filled btn-large">Checkout</button>
+        </form>
+      </ng-template>
+    </ng-template>
+  </main>
+</div>

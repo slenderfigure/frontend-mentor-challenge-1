@@ -1,0 +1,69 @@
+<section class="previewer">
+  <button (click)="onNavButtonClick('PREV')" 
+    [disabled]="activeImage === 0"
+    aria-label="Go to Previous Image"
+    type="button"
+    class="previewer__switch-button">
+    <svg class="icon icon-left" width="12" height="18" xmlns="http://www.w3.org/2000/svg">
+      <path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd"/>
+    </svg>
+  </button>
+
+  <figure (click)="openLightbox()"
+    (keyup)="largeImageKeyup($event)"
+    tabindex="0"
+    class="previewer__active-image">
+    <img [src]="activeImageOriginalUrl" 
+      [alt]="'Product Image ' + (activeImage + 1)" 
+      class="image"
+      draggable="false">
+  </figure>
+  
+  <button (click)="onNavButtonClick('NEXT')" 
+    [disabled]="activeImage === images.length - 1"
+    aria-label="Go to Next Image"
+    type="button"
+    class="previewer__switch-button">
+    <svg class="icon icon-right" width="13" height="18" xmlns="http://www.w3.org/2000/svg">
+      <path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd"/>
+    </svg>
+  </button>
+
+  <form class="previewer__ribbon" role="menu">
+    <div *ngFor="let image of images; let i=index"
+      (keyup)="thumbnailKeyup($event, i)"
+      role="menuitemradio"
+      tabindex="0"
+      class="group">
+      <input 
+        (change)="switchImage(i)"
+        [checked]="activeImage === i"
+        type="radio" 
+        id="{{ 'thumbnail ' + i }}"
+        name="thumbnail"
+        class="thumbnail-input">
+
+      <label for="{{ 'thumbnail ' + i }}" 
+        [attr.aria-label]="'Thumbnail ' + (i + 1)"
+        class="thumbnail-wrapper">
+        <img 
+          [src]="image.thumbnail" 
+          [alt]="'Thumbnail ' + (i + 1)" 
+          class="thumbnail"
+          draggable="false">
+      </label>
+    </div>
+  </form>
+
+  <div class="previewer__total-images-indicator">
+    <button *ngFor="let image of images; let i=index"
+      (click)="switchImage(i)"
+      [attr.aria-label]="'Got to image ' + i + 1"
+      type="button"
+      class="switch-button"
+      [class.active]="activeImage === i">
+    </button>
+  </div>
+</section>
+
+<app-lightbox [images]="images"></app-lightbox>

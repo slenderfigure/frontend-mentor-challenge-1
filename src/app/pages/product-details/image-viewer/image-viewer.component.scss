@@ -1,0 +1,215 @@
+@import '/src/styles.scss';
+
+.previewer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 27rem;
+  user-select: none;
+
+  @media only screen and (max-width: 700px) {
+    max-width: 100%;
+    gap: 1rem;
+  }
+
+  &__switch-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: $white;
+    border-radius: 50%;
+    transition: opacity .3s $easeOutQuint;
+    outline: none;
+    z-index: 3;
+
+    @media only screen and (max-width: 700px) {
+      display: flex;
+    }
+
+    &:first-of-type {
+      left: .5rem;
+    }
+    
+    &:last-of-type {
+      right: .5rem;
+    }
+
+    &:disabled {
+      opacity: .4;
+      cursor: default;
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 3px $orange;
+    }
+
+    &:hover:not(:disabled) { 
+      .icon path {
+        stroke: $orange
+      }
+    }
+
+    .icon {
+      path {
+        transition: stroke .3s $easeOutQuint;
+      }
+
+      &-left {
+        transform: translateX(-2px);
+      }
+      
+      &-right {
+        transform: translateX(1px);
+      }
+    }
+  }
+  
+  &__active-image {
+    position: relative;
+    max-height: 27rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    overflow: hidden;
+
+    @media only screen and (max-width: 700px) {
+      border-radius: unset;
+      max-height: unset;
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 3px $orange;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+  }
+
+  &__ribbon {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 5rem;
+
+    @media only screen and (max-width: 1000px) {
+      height: 4rem;
+    }
+
+    @media only screen and (max-width: 700px) {
+      display: none;
+    }
+
+    .group {
+      flex-shrink: 0;
+      width: 5rem;
+      border-radius: .5rem;
+
+      @media only screen and (max-width: 1000px) {
+        width: 4rem;
+      }
+
+      &:focus-visible {
+        box-shadow: 0 0 0 3px $orange;
+      }
+
+      .thumbnail-input {
+        display: none;
+
+        &:checked + .thumbnail-wrapper {
+          box-shadow: 0 0 0 2px $orange;
+          
+          .thumbnail {
+            opacity: .4;
+          }
+        }
+      }
+
+      .thumbnail-wrapper {
+        position: relative;
+        display: block;
+        background-color: $white;
+        border-radius: .5rem;
+        overflow: hidden;
+        transition: box-shadow .3s $easeOutQuint;
+        cursor: pointer;
+
+        &::after {
+          content: '';
+          position: absolute;
+          opacity: 0;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: .5rem;
+          z-index: 1;
+        }    
+
+        &:hover {
+          .thumbnail {
+            opacity: .4;
+          }
+        }
+      }
+
+      .thumbnail {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        transition: opacity .3s $easeOutQuint;
+      }
+    }
+  }
+
+  &__total-images-indicator {
+    display: none;
+    width: 100%;
+
+    @media only screen and (max-width: 700px) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .switch-button {
+      display: block;
+      width: 12px;
+      height: 12px;
+      border-radius: 12px;
+      background-color: $grayishBlue;
+      transition: width .3s $easeOutQuint,
+                  background-color .3s $easeOutQuint;
+
+      &.active {
+        background-color: $orange;
+        width: 2rem;
+      }
+    }
+
+  }
+
+}

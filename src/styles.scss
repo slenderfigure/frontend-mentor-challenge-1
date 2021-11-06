@@ -1,1 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+@import '/src/sass/style-reset';
+@import '/src/sass/fonts';
+@import '/src/sass/variables';
+@import '/src/sass/animations';
+@import '/src/sass/utilities';
+@import '/src/sass/base';

@@ -1,0 +1,286 @@
+@import '/src/styles.scss';
+
+.lightbox {
+  width: fit-content;
+  user-select: none;
+  animation: zoomIn .2s $easeOutQuint;
+
+  @media only screen and (max-width: 540px) {
+    width: auto;
+  }
+
+  &__top {
+    width: 100%;
+    padding: 1rem 0;
+    
+    @media only screen and (max-width: 540px) {
+      padding: 2rem 1rem;
+    }
+
+    .close-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      margin-left: auto;
+      border-radius: 50%;
+      transform: scale(1.2);
+      user-select: none;
+      outline: none;
+
+      &:hover { 
+        .icon path {
+          fill: $orange
+        }
+      }
+
+      &:focus-visible {
+        box-shadow: 0 0 0 2px $orange;
+      }
+
+      .icon path {
+        transition: fill .3s $easeOutQuint;
+      }
+    }
+  }
+
+  &__content {
+    position: relative;
+    width: 100%;
+    margin-bottom: 2rem;
+
+    .switch-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3rem;
+      height: 3rem;
+      background-color: $white;
+      border-radius: 50%;
+      transition: opacity .3s $easeOutQuint;
+      outline: none;
+      z-index: 3;
+
+      &:disabled {
+        opacity: .4;
+        cursor: default;
+      }
+      
+      &:first-of-type {
+        left: -1.5rem;
+      }
+      
+      &:last-of-type {
+        right: -1.5rem;
+      }
+
+      &:focus-visible {
+        box-shadow: 0 0 0 3px $orange;
+      }
+
+      @media only screen and (max-width: 540px) {
+        visibility: hidden;
+        width: 2.5rem;
+        height: 2.5rem;
+
+        &:first-of-type {
+          left: .5rem;
+        }
+        
+        &:last-of-type {
+          right: .5rem;
+        }
+      }
+
+      &:hover:not(:disabled) { 
+        .icon path {
+          stroke: $orange
+        }
+      }
+
+      .icon {
+        path {
+          transition: stroke .3s $easeOutQuint;
+        }
+
+        &-left {
+          transform: translateX(-2px);
+        }
+        
+        &-right {
+          transform: translateX(1px);
+        }
+      }
+     
+    }
+
+    &:hover {
+      .switch-button {
+        visibility: visible;
+      }
+    }
+  }
+
+  &__image-strip {
+    position: relative;
+    width: 35rem;
+    height: 35rem;
+
+    @media only screen and (max-width: 630px) {
+      width: 30rem;
+      height: 30rem;
+    }
+
+    @media only screen and (max-width: 540px) {
+      width: 100%;
+      height: 30rem;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border-radius: .5rem;
+    overflow: hidden;
+    z-index: -1;
+
+    @media only screen and (max-width: 540px) {
+      border-radius: unset;
+    }
+
+    &.initial {
+      z-index: 1;
+    }
+
+    &.next {
+      animation: slideFromTheRight 1s $easeOutQuint; 
+      z-index: 1; 
+    }
+    
+    &.previous { 
+      z-index: 1;
+      animation: slideFromTheLeft 1s $easeOutQuint; 
+    }
+
+    .image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      border-radius: .5rem;
+
+      @media only screen and (max-width: 540px) {
+        border-radius: unset;
+        object-fit: contain;
+      }
+    }
+  }
+
+  &__active-image {
+    position: relative;
+    max-width: 35rem;
+    max-height: 35rem;
+    border-radius: .5rem;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+  }
+
+  &__ribbon {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    height: 5rem;
+    padding: 0 1rem;
+
+    .group {
+      flex-shrink: 0;
+      width: 5rem;
+      border-radius: .5rem;
+
+      @media only screen and (max-width: 540px) {
+        flex: 1;
+        height: inherit;
+      }  
+
+      &:focus-visible {
+        box-shadow: 0 0 0 3px $orange;
+      }
+
+      .thumbnail-input {
+        display: none;
+
+        &:checked + .thumbnail-wrapper {
+          box-shadow: 0 0 0 2px $orange;
+          
+          .thumbnail {
+            opacity: .4;
+          }
+        }
+      }
+
+      .thumbnail-wrapper {
+        position: relative;
+        display: block;
+        background-color: $white;
+        border-radius: .5rem;
+        overflow: hidden;
+        transition: box-shadow .3s $easeOutQuint;
+        cursor: pointer;
+
+        &::after {
+          content: '';
+          position: absolute;
+          opacity: 0;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+        }    
+
+        &:hover {
+          .thumbnail {
+            opacity: .4;
+          }
+        }
+      }
+
+      .thumbnail {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        transition: opacity .3s $easeOutQuint;
+      }
+    }
+  }
+
+}

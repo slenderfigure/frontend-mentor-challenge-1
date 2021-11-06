@@ -1,0 +1,46 @@
+ <app-modal [id]="modalId">
+  <aside #mobileMenu 
+    role="menu" 
+    class="mobile-menu"
+    [class]="{ active: activateMenu, closing: !activateMenu }">
+    <div class="mobile-menu__header">
+      <button (click)="closeMenu()" 
+        aria-label="Close Button"
+        type="button" 
+        class="mobile-menu__close-btn" >
+        <img src="assets/images/icon-close.svg" 
+          alt="icon" 
+          class="icon" 
+          draggable="false">
+      </button>
+    </div>
+
+    <ul class="mobile-menu__list">
+      <li class="mobile-menu__list-item">
+        <a href="#" class="mobile-menu__link">
+          Collections
+        </a>
+      </li>
+      <li class="mobile-menu__list-item">
+        <a href="#" class="mobile-menu__link">
+          Menu
+        </a>
+      </li>
+      <li class="mobile-menu__list-item">
+        <a href="#" class="mobile-menu__link">
+          Women
+        </a>
+      </li>
+      <li class="mobile-menu__list-item">
+        <a href="#" class="mobile-menu__link">
+          About
+        </a>
+      </li>
+      <li class="mobile-menu__list-item">
+        <a href="#" class="mobile-menu__link">
+          Contact
+        </a>
+      </li>
+    </ul>
+  </aside>
+ </app-modal>

@@ -1,0 +1,79 @@
+<header class="header">
+  <nav class="header__navbar">
+    <div class="shopping-cart-wrapper wrapper">
+      <app-shopping-cart-popup 
+        (cartClosed)="cartClosed()">
+      </app-shopping-cart-popup>
+    </div>
+    
+    <div class="navbar-wrapper wrapper">
+      <!-- Menu Button -->
+      <button (click)="openSideMenu()"
+        aria-label="Menu Button"
+        class="header__menu-btn">
+        <img src="assets/images/icon-menu.svg" 
+          alt="icon" 
+          class="icon"
+          draggable="false">
+      </button>
+
+      <!-- Brand Logo -->
+      <a href="/" class="header__brand-logo">
+        <img src="assets/images/logo.svg" alt="Sneakers Logo" class="icon">
+      </a>
+
+      <!-- Link List -->
+      <ul role="menubar" 
+        class="header__links-list">
+        <li role="menuitem" 
+          class="header__links-list-item">
+          <a href="#" class="header__link">Collections</a>
+        </li>
+        <li role="menuitem" 
+          class="header__links-list-item">
+          <a href="#" class="header__link">Men</a>
+        </li>
+        <li role="menuitem" 
+          class="header__links-list-item">
+          <a href="#" class="header__link">Women</a>
+        </li>
+        <li role="menuitem" 
+          class="header__links-list-item">
+          <a href="#" class="header__link">About</a>
+        </li>
+        <li role="menuitem" 
+          class="header__links-list-item">
+          <a href="#" class="header__link">Contact</a>
+        </li>
+      </ul>
+
+      <!-- User Options -->
+      <div role="menubar"
+        class="header__user-options">
+        <button (click)="onViewCart()" 
+          aria-label="Shopping Cart Button"
+          type="button" 
+          class="shopping-cart-launch-btn"
+          [class]="{ active: cartVisible }">
+          <img src="assets/images/icon-cart.svg" 
+            alt="Cart Icon" 
+            class="icon">
+          <span *ngIf="itemCount" 
+            role="tooltip" 
+            aria-label="Shopping Cart Badge"
+            class="badge">
+            {{ itemCount }}
+          </span>
+        </button>
+
+        <button aria-label="User Profile Button"
+          type="button" 
+          class="header__user-profile-btn">
+          <img src="assets/images/image-avatar.png" 
+            alt="User Avatar" 
+            class="user-avatar">
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>

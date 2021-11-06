@@ -1,0 +1,38 @@
+.wrapper {
+  max-width: 88rem;
+  margin: auto;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  font-size: .85rem;
+  font-weight: bold;
+  white-space: nowrap;
+  border-radius: .5rem;
+  transition: opacity .3s $easeOutQuint;
+  overflow: hidden;
+  user-select: none;
+
+  &:hover {
+    opacity: .7;
+  }
+
+  &-filled {
+    color: $white;
+    background-color: $orange;
+    outline-color: $darkGrayishBlue;
+  }
+
+  &-large {
+    width: 100%;
+    height: 3.35rem;
+    padding: 0 1.2rem;
+  }
+
+  &-dropshowed {
+    box-shadow: 0 1rem 3rem rgba($orange, .4);
+  }
+}

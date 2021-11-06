@@ -1,0 +1,66 @@
+@keyframes rotate {
+  from { transform: rotate(360deg); }
+}
+
+@keyframes easeIn {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  } 
+}
+
+@keyframes easeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  } 
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+}
+
+@keyframes slideMobileMenuIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slideMobileMenuOut {
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slideFromTheRight {
+  from {
+    opacity: 0;
+    transform: translateX(10rem);
+  }
+}
+
+@keyframes slideFromTheLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}

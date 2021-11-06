@@ -1,0 +1,49 @@
+@import '/src/styles.scss';
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 15rem;
+  height: 100%;
+  background-color: $white;
+  
+  &.active {
+    animation: slideMobileMenuIn .3s $easeOutQuint;
+  }
+
+  &.closing {
+    animation: slideMobileMenuOut .5s $easeOutQuint forwards;
+  }
+
+  &__header {
+    margin-bottom: .5rem;
+    padding: .6rem;
+  }
+
+  &__close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    color: $veryDarkBlue;
+  }
+
+  &__link {
+    display: block;
+    width: 100%;
+    padding: .5rem .6rem;
+    border-radius: .4rem;
+    font-weight: bold;
+  }
+
+}

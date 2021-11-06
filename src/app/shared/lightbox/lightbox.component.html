@@ -1,0 +1,75 @@
+<app-modal [id]="modalId">
+  <div class="lightbox">
+    <div class="lightbox__top">
+      <button (click)="closeLightbox()" 
+        aria-label="Close Button"
+        type="button"
+        class="close-button">
+        <svg class="icon" width="14" height="15" xmlns="http://www.w3.org/2000/svg">
+          <path d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z" fill="rgb(247, 248, 253)" fill-rule="evenodd"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="lightbox__content">
+      <button (click)="onNavButtonClick('PREV')" 
+        [disabled]="nextImage === 0"
+        aria-label="Go to Previous Image"
+        type="button"
+        class="switch-button">
+        <svg class="icon icon-left" width="12" height="18" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd"/>
+        </svg>
+      </button>
+      
+      <div class="lightbox__image-strip">
+        <figure *ngFor="let image of images; let i=index" 
+          class="lightbox__image"
+          [class.initial]="nextImage === i"
+          #largeImage>
+          <img [src]="image.original" 
+            [alt]="'Product Image ' + (i + 1)" 
+            class="image"
+            draggable="false"
+            loading="lazy">
+        </figure>
+      </div>
+      
+      <button (click)="onNavButtonClick('NEXT')" 
+        [disabled]="nextImage === images.length - 1"
+        aria-label="Go to Next Image"
+        type="button"
+        class="switch-button">
+        <svg class="icon icon-right" width="13" height="18" xmlns="http://www.w3.org/2000/svg">
+          <path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd"/>
+        </svg>
+      </button>
+    </div>
+
+    <form class="lightbox__ribbon" role="menu">
+      <div *ngFor="let image of images; let i=index"
+        (keyup)="thumbnailKeyup($event, i)"
+        role="menuitemradio"
+        class="group"
+        tabindex="0">
+        <input 
+          (change)="switchImage(i)"
+          [checked]="nextImage === i"
+          type="radio" 
+          id="{{ 'lightbox-thumbnail ' + i }}"
+          name="lightbox-thumbnail"
+          class="thumbnail-input">
+  
+        <label for="{{ 'lightbox-thumbnail ' + i }}" 
+          [attr.aria-label]="'Thumbnail ' + (i + 1)"
+          class="thumbnail-wrapper">
+          <img 
+            [src]="image.thumbnail" 
+            [alt]="'Thumbnail ' + (i + 1)" 
+            class="thumbnail"
+            draggable="false">
+        </label>
+        </div>
+    </form>
+  </div>
+</app-modal>
