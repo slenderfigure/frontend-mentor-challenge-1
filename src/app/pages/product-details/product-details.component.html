@@ -1,4 +1,4 @@
-<main class="content">
+<main *ngIf="!fetchingProductDetails" class="content">
   <div class="content-wrapper wrapper">
     <!-- Image Viewer -->
     <app-image-viewer [images]="product.media.images">

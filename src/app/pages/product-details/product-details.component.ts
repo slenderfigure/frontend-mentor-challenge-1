@@ -14,8 +14,8 @@ import { ShoppingCartService } from 'src/app/common/services/shopping-cart.servi
 export class ProductDetailsComponent implements OnInit, OnDestroy {
   product!: Product;
   form!: FormGroup;
-  productSubscription!: Subscription;
   quantitySubscription!: Subscription;
+  fetchingProductDetails = true;
 
   constructor(
     private productService: ProductService,
@@ -25,15 +25,15 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     /** Get Product **/
-    this.productSubscription = this.productService.getProductDetails(4579)
+    this.fetchingProductDetails = true;
+    this.productService.getProductDetails(4579)
       .subscribe(product => {
         this.product = product;
         this.initProductForm();
-      });
+      }).add(() => this.fetchingProductDetails = false);
   }
 
   ngOnDestroy(): void {
-    this.productSubscription.unsubscribe();
     this.quantitySubscription.unsubscribe();
   }
 

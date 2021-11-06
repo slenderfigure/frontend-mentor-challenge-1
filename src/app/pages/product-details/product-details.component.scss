@@ -1,8 +1,7 @@
 @import '/src/styles.scss';
 
 .content {
-  padding-top: 6.25rem;
-  padding-bottom: 5rem;
+  padding: 6.25rem 0 2rem;
 
   @media only screen and (max-width: 1000px) {
     padding-top: 4rem;

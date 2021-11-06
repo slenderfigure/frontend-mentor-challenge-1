@@ -10,6 +10,7 @@ import { ShoppingCartPopupComponent } from './layout/navbar/shopping-cart-popup/
 import { ModalComponent } from './shared/modal/modal.component';
 import { LightboxComponent } from './shared/lightbox/lightbox.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
